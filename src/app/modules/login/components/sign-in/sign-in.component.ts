@@ -1,11 +1,22 @@
-import { Component } from '@angular/core';
-import { NgForm }    from '@angular/forms';
+import { Component }             from '@angular/core';
+import { FormsModule, NgForm }   from '@angular/forms';
+import { MatCardModule }         from '@angular/material/card';
+import { MatInputModule }        from '@angular/material/input';
+import { MatButtonModule }       from '@angular/material/button';
+
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: [ './sign-in.component.scss' ]
+  styleUrls: [ './sign-in.component.scss' ],
+  imports: [
+    FormsModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule
+  ],
+  standalone: true
 })
 export class SignInComponent {
 

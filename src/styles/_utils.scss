@@ -1,0 +1,13 @@
+pre {
+  background-color: #f4f4f4; /* Color de fondo */
+  border: 1px solid #ddd; /* Borde */
+  border-radius: 4px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+  padding: 16px; /* Relleno */
+  overflow-x: auto; /* Desplazamiento horizontal si el contenido es demasiado ancho */
+  white-space: pre-wrap; /* Conserva los espacios y saltos de línea */
+  word-wrap: break-word; /* Permite la división de palabras */
+  font-family: 'Courier New', monospace; /* Fuente */
+  font-size: 16px; /* Tamaño de fuente */
+  line-height: 1.5; /* Altura de línea */
+}
