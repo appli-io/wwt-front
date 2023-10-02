@@ -1,47 +1,39 @@
-import { JsonPipe }                           from '@angular/common';
-import { Component }                          from '@angular/core';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { ActivatedRoute }                     from '@angular/router';
-import { TableComponent }                     from '../../../../shared/modules/table/components/table/table.component';
+import { AfterViewInit, Component, forwardRef, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatTableModule }              from '@angular/material/table';
+import { ActivatedRoute }                                  from '@angular/router';
+import { MatButtonModule }                                 from '@angular/material/button';
+import { MatSort, MatSortModule }                          from '@angular/material/sort';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+import { TableComponent } from '../../../../shared/components/table/table.component';
+import { UsersService }   from '../../service/users.service';
+import { IResponseUser }  from '../../interfaces/response-user.interface';
+import { DatePipe }       from '@angular/common';
 
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
   styleUrls: [ './users-list.component.scss' ],
-  imports: [
-    TableComponent,
-    MatTableModule,
-    JsonPipe
-  ],
+  imports: [ MatButtonModule, forwardRef(() => TableComponent), MatSortModule, MatTableModule, TableComponent, DatePipe ],
   standalone: true
 })
 export class UsersListComponent {
+  @ViewChild(TableComponent, {static: true}) table: TableComponent<IResponseUser>;
   title: string = 'Users';
   displayedColumns: string[] = [ 'position', 'name', 'weight', 'symbol' ];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource: MatTableDataSource<IResponseUser>;
 
-  constructor(private readonly route: ActivatedRoute) {
+  @ViewChild('sort') sort: MatSort;
+
+  constructor(private readonly route: ActivatedRoute,
+              private readonly usersService: UsersService
+  ) {
     // get title from data in route
     this.title = this.route.snapshot.data['title'];
+
+    // get users from service
+    this.usersService.getAll().subscribe((users) => {
+      this.dataSource = new MatTableDataSource<IResponseUser>(users.content);
+      this.dataSource.sort = this.sort;
+    });
   }
 }
