@@ -5,6 +5,7 @@ import { MatCardModule }         from '@angular/material/card';
 import { MatInputModule }        from '@angular/material/input';
 import { MatButtonModule }       from '@angular/material/button';
 import { AuthService }           from '../../../../auth.service';
+import { Router }                from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -20,15 +21,14 @@ import { AuthService }           from '../../../../auth.service';
 })
 export class SignInComponent {
 
-  constructor(private readonly authenticationService: AuthService) {}
+  constructor(private readonly authenticationService: AuthService, private readonly router: Router) {}
 
   onSubmit(form: NgForm) {
     if (form.valid) {
       const {email, password} = form.value;
       this.authenticationService.signIn(email, password).subscribe({
         next: (response: HttpResponse<any>) => {
-          console.log('User logged in successfully', response.body);
-          console.log('All cookies', document.cookie.length);
+          this.router.navigate([ '/' ])
         },
         error: (error) => {
           console.log('Error while logging in user', error);

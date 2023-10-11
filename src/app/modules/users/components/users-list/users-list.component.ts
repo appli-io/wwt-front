@@ -32,7 +32,7 @@ export class UsersListComponent {
 
     // get users from service
     this.usersService.getAll().subscribe((users) => {
-      this.dataSource = new MatTableDataSource<IResponseUser>(users.content);
+      this.dataSource = new MatTableDataSource<IResponseUser>(users.content as IResponseUser[]);
       this.dataSource.sort = this.sort;
     });
   }

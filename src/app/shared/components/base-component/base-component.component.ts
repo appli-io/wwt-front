@@ -6,7 +6,7 @@ import { ActivatedRoute }               from '@angular/router';
   template: `
     <ng-content></ng-content>`
 })
-export class BaseComponentComponent implements OnInit, OnDestroy {
+export class BaseComponent implements OnInit, OnDestroy {
   title: string = '';
   private readonly onDestroy = new Subject<void>();
 

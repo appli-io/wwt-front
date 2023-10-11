@@ -1,5 +1,5 @@
 export interface IApi<T> {
-  content: T[]
+  content: T[] | T
   statusCode: number
   path: string
   method: string

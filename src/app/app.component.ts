@@ -10,15 +10,17 @@ import { AuthService }       from './auth.service';
 export class AppComponent implements OnInit {
   title = 'WWT_base';
 
-  constructor(private readonly authService: AuthService) {}
+  constructor(public readonly authService: AuthService) {
+    if (this.authService.checkUsersToken()) {
+      this.authService.getUserInfo(true).then();
+    } else {
+      this.authService.userSubject.next(null);
+      // TODO: redirect to login page
+    }
+  }
 
   ngOnInit() {
     // initialize flowbite
     initFlowbite();
-    console.log(this.checkIfUserCookieExists());
-  }
-
-  checkIfUserCookieExists() {
-    return this.authService.checkIfUserCookieExists();
   }
 }

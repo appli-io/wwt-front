@@ -1,7 +1,10 @@
-import { Component }              from '@angular/core';
-import { CommonModule }           from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule }      from '@angular/common';
+
 import { ProfileHeaderComponent } from '../profile-header/profile-header.component';
 import { ProfileInfoComponent }   from '../profile-info/profile-info.component';
+import { AuthService }            from '../../../../auth.service';
+import { IResponseUser }          from '../../../users/interfaces/response-user.interface';
 
 @Component({
   selector: 'wwt-profile',
@@ -10,9 +13,12 @@ import { ProfileInfoComponent }   from '../profile-info/profile-info.component';
   templateUrl: './profile.component.html',
   styleUrls: [ './profile.component.scss' ]
 })
-export class ProfileComponent {
-  userName: string = 'John Doe';
-  userRole: string = 'Software Engineer';
-  userEmail: string = 'john.doe@example.com';
-  userLocation: string = 'San Francisco, CA';
+export class ProfileComponent implements OnInit {
+  public user: IResponseUser | null = null;
+
+  constructor(private readonly authService: AuthService) {}
+
+  ngOnInit() {
+    this.authService.userSubject.subscribe(user => this.user = user);
+  }
 }

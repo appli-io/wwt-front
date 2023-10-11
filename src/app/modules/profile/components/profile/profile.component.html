@@ -1,12 +1,15 @@
 <div class="container mx-auto p-8">
   <wwt-profile-header
-    [userName]="userName"
-    [userRole]="userRole">
+    [userName]="user?.name || 'John Doe'"
+    [userRole]="'Software Engineer'"
+    [userAvatar]="user?.avatar || ''">
   </wwt-profile-header>
   <div class="mt-8">
     <wwt-profile-info
-      [userEmail]="userEmail"
-      [userLocation]="userLocation">
+      [userEmail]="user?.email || 'john.doe@email.com'"
+      [userLocation]="'Unknown Location'">
     </wwt-profile-info>
   </div>
 </div>
+
+<pre>{{user | json}}</pre>
