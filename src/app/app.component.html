@@ -1,5 +1,7 @@
-<wwt-logged-navbar></wwt-logged-navbar>
+<div class="dark:bg-gray-900 bg-gray-200 transition-all ease-out h-full">
+  <wwt-logged-navbar></wwt-logged-navbar> <!-- 66px alto -->
 
-<div class="container mx-auto">
-  <router-outlet></router-outlet>
+  <div class="container mx-auto" style="height: calc(100vh - 66px);">
+    <router-outlet class="h-full"></router-outlet>
+  </div>
 </div>

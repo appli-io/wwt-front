@@ -76,3 +76,21 @@ $WWT_base-dark-theme: mat.define-dark-theme((
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($WWT_base-theme);
+
+
+// Custom CSS overrides
+
+// Mat Menu Customization
+
+// Mat Menu Item SM size
+.mat-mdc-menu-item {
+  font-size: 14px;
+  height: 40px;
+  line-height: 32px;
+  padding: 0 16px;
+  min-height: unset !important;
+}
+
+.mat-mdc-menu-item .mat-icon {
+  margin-right: 6px !important;
+}

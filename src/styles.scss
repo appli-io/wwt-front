@@ -5,7 +5,14 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+html, body {
   font-family: 'Montserrat', sans-serif;
+  height: 100%;
+  margin: 0;
 }
 
+// Custom modules heights
+app-root {
+  display: block;
+  height: 100%;
+}

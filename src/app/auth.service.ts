@@ -79,15 +79,12 @@ export class AuthService {
 
   logout() {
     lastValueFrom(this.http.post(`${ this.baseUrl }/auth/sign-out`, {}, defaultRequestOptions as any))
-      .then(() => {
+      .finally(() => {
         this.dbService.removeUserInfo().then();
         localStorage.removeItem('token');
         this.userSubject.next(null);
+        this.router.navigate([ '/authentication/sign-in' ]).then(() => window.location.reload());
       });
-
-    this.router.navigate([ '/authentication/sign-in' ]).then(() => {
-      window.location.reload();
-    });
   }
 
   isTokenExpired(): boolean {
@@ -104,6 +101,7 @@ export class AuthService {
     const payload = JSON.parse(jsonPayload);
     const expirationDate = new Date(payload.exp * 1000);
     const currentDate = new Date();
+    console.log(expirationDate);
 
     return expirationDate < currentDate;
   }

@@ -19,15 +19,9 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
           return this.authService.refreshToken().pipe(
             switchMap(({accessToken}) => {
               const clonedRequest = request.clone({setHeaders: {Authorization: `Bearer ${ accessToken }`}});
+              localStorage.setItem('token', accessToken);
+              this.authService.getUserInfo(true).then();
               return next.handle(clonedRequest);
-            }),
-            catchError((error: HttpErrorResponse) => {
-              if (error.status === 401) {
-                alert('Tu sesión ha vencido. Por favor, vuelve a iniciar sesión.');
-                this.authService.logout();
-                this.router.navigate([ '/authentication/sign-in' ]);
-              }
-              return throwError(error);
             })
           );
         }

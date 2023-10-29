@@ -8,8 +8,9 @@ import { MatIconModule }                       from '@angular/material/icon';
 import { MatButtonModule }                     from '@angular/material/button';
 import { NgOptimizedImage }                    from '@angular/common';
 
-import { StoreModule }        from '@ngrx/store';
-import { IonicStorageModule } from '@ionic/storage-angular';
+import { StoreModule }         from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { IonicStorageModule }  from '@ionic/storage-angular';
 
 import { AppRoutingModule }        from './app-routing.module';
 import { AppComponent }            from './app.component';
@@ -17,6 +18,8 @@ import { TokenInterceptor }        from './commons/interceptors/token.intercepto
 import { UnauthorizedInterceptor } from './commons/interceptors/unauthorized.interceptor';
 import { LoggedNavbarComponent }   from './shared/components/navbar/logged-navbar/logged-navbar.component';
 import { GhostNavbarComponent }    from './shared/components/navbar/ghost-navbar/ghost-navbar.component';
+import { environment }             from '../environments/environment';
+import { applicationReducer }      from './shared/store/app-state.reducer';
 
 @NgModule({
   declarations: [
@@ -33,9 +36,13 @@ import { GhostNavbarComponent }    from './shared/components/navbar/ghost-navbar
     MatButtonModule,
     NgOptimizedImage,
     IonicStorageModule.forRoot(),
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({'appState': applicationReducer}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
     LoggedNavbarComponent,
-    GhostNavbarComponent
+    GhostNavbarComponent,
   ],
   providers: [
     {

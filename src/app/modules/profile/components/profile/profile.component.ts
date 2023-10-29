@@ -16,7 +16,7 @@ import { IResponseUser }          from '../../../users/interfaces/response-user.
 export class ProfileComponent implements OnInit {
   public user: IResponseUser | null = null;
 
-  constructor(private readonly authService: AuthService) {}
+  constructor(readonly authService: AuthService) {}
 
   ngOnInit() {
     this.authService.userSubject.subscribe(user => this.user = user);

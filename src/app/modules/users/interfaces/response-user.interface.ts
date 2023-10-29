@@ -4,6 +4,6 @@ export interface IResponseUser {
   email: string;
   avatar: string;
   username: string;
-  createdAt: string;
-  updatedAt: string;
+  position: string;
+  location: string;
 }

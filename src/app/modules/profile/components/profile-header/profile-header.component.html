@@ -1,9 +1,15 @@
-<div class="bg-gray-100 p-4">
-  <div class="flex items-center">
-    <img class="h-14 w-14 rounded-full" [src]="userAvatar" alt="User avatar">
-    <div class="ml-4">
-      <h1 class="text-3xl font-semibold text-gray-800">{{ userName }}</h1>
-      <p class="text-sm text-gray-600">{{ userRole }}</p>
+<div class="bg-gray-100 h-60 p-4 relative flex justify-center items-center text-gray-500">
+  <span>TODO:</span> Company bg picture
+</div>
+<div>
+  <div class="flex flex-row items-end pl-5">
+    <img [src]="user?.avatar" alt="User avatar" class="h-40 w-40 -mt-24 rounded-full shadow-md z-10 hover:grayscale transition-all ease-in-out">
+    <div class="ml-4 pt-4 flex-grow">
+      <h1 class="text-3xl font-semibold dark:text-gray-50 text-gray-800">{{ user?.name }} <span class="text-sm text-gray-400">Santiago, Chile</span></h1>
+      <p class="text-sm dark:text-gray-50 text-gray-800">{{ user?.position }}</p>
+    </div>
+    <div class="mr-4">
+      <span class="dark:text-red-500 font-bold">TODO:</span> <span class="dark:text-white"> Company name</span>
     </div>
   </div>
 </div>
